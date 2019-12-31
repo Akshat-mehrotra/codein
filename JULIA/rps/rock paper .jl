@@ -12,7 +12,7 @@ function intro()
         println(i)
         sleep(0.5)
     end
-    println("Enter!")
+    println("Enter Rock Paper or scissor:")
     println("\n ---- \n")
 end
 
