@@ -10,6 +10,7 @@ function intro()
         println(i)
         sleep(0.5)
     end
+    println("SHOOOOOT!!")
     println("\n ---- \n")
 end
 
@@ -30,7 +31,7 @@ end
 
 function  rerole()
     println("\n ---- \n")
-    println("REROLE!")
+    println("YOU AND THE CPU GOT THE SAME THING\nREROLE!")
     println("\n ---- \n")
     intro()
     turn = lowercase(readline())
