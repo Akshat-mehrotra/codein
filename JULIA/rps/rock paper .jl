@@ -1,4 +1,6 @@
+
 println("ROCK PAPER TIME!!!")
+println("Youl'll be playing rock paper and scissors with the cpu!\n enter rock paper or scissor after shoot to input your choice!")
 choices = ["Rock", "Paper","Scissors"]
 turns = 1
 player = 0
@@ -10,7 +12,7 @@ function intro()
         println(i)
         sleep(0.5)
     end
-    println("ENTER ROCK, PAPER OR SCISSORS!!")
+    println("Enter!")
     println("\n ---- \n")
 end
 
@@ -19,13 +21,13 @@ end
 
 function lose(cpu_choice)
     global cpu+=1
-    println(cpu_choice)
+    println("CPU chose - > "*cpu_choice)
     println("YOU LOSE")
 end
 
 function win(cpu_choice)
     global player+=1
-    println(cpu_choice)
+    println("CPU chose - > "*cpu_choice)
     println("YOU WIN!")
 end
 
@@ -60,3 +62,4 @@ println("\n\nPLAYER SCORE -> "*string(player))
 println("CPU SCORE -> "*string(cpu,"\n"))
 
 player > cpu ? println("YOU WIN THE GAME!") : println("\n\nYOU LOSE THE GAME!")
+
