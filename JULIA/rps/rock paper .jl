@@ -33,7 +33,7 @@ function  rerole()
     println("REROLE!")
     println("\n ---- \n")
     intro()
-    turn = lowercase(input())
+    turn = lowercase(readline())
     cpu_choice = lowercase(rand(choices))
     cpu_choice == turn ? cpu_choice=rerole() : nothing
     return cpu_choice
@@ -43,7 +43,7 @@ for _ in 1:3
     player = 0
     cpu = 0
     intro()
-    turn = lowercase(input())
+    turn = lowercase(readline())
     cpu_choice = lowercase(rand(choices))
     cpu_choice == turn ? cpu_choice=rerole() : nothing
     cpu_choice == "rock" && turn == "scissors" ? lose(cpu_choice) : nothing
