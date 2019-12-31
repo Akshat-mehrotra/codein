@@ -10,7 +10,7 @@ function intro()
         println(i)
         sleep(0.5)
     end
-    println("SHOOOOOT!!")
+    println("ENTER ROCK, PAPER OR SCISSORS!!")
     println("\n ---- \n")
 end
 
