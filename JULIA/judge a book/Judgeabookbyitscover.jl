@@ -1,3 +1,5 @@
+
+
 using Flux
 using Flux: @epochs, onehotbatch, crossentropy, throttle
 using Images
@@ -5,19 +7,21 @@ using FileIO
 using CSV
 using Statistics
 
-train_path = "G:\\mlimgs\\Book-Train-FULL\\"
+train_path = "G:\\mlimgs\\Book-Train-FULL\\"# contains 10000 images
 train_csv = "F:\\book-dataset\\Task1\\book30-listing-train1.csv"
 
-test_path = "G:\\mlimgs\\Book-Test-FULL\\"
+test_path = "G:\\mlimgs\\Book-Test-FULL\\" #Contains 1000 images but we'll use 500
 test_csv = "F:\\book-dataset\\Task1\\book30-listing-test1.csv"
 
-train_dataset  = CSV.read(train_csv)
-test_dataset = CSV.read(test_csv)
+train_dataset  = CSV.read(train_csv) # read the csv for labels
+                                     # The CSVs have 2 colums: first of genre and second of name of the book
+                                     # The name of the book isnt required for the program but is included for debugging purposes
 
-train_imglist = readdir(train_path)
-test_imglist = readdir(test_path)
+train_imglist = readdir(train_path) # This will be used to find the total number of images in training set
+test_imglist = readdir(test_path) # In ideal scenario this will also be used for finding the total number of images in the testing set
+# but we are only going to use 500 of those
 
-train_setsize = length(train_imglist)
+train_setsize = length(train_imglist) # finding the size of training set
 test_setsize = 500
 
 batch_size = 400
@@ -27,11 +31,11 @@ epochs = 10
 function create_batch(indexs; path, csv, dataset)
     X = Array{Float32}(undef, imsize, imsize, 3, length(indexs))
     for (p,i) in enumerate(indexs)
-        img = load(string(path,i,".png"))
+        img = load(string(path,i,".png")) # The images are labeled like 1.png, 2.png, and so on.
         img = channelview(RGB.(imresize(img, imsize, imsize)))
-        img = Float32.(permutedims(img, (2, 3, 1)))
-
-        X[:, :, :, p] = img
+        img = Float32.(permutedims(img, (2, 3, 1))) # we need the image in (PIXEL,PIXEL,CHANNEL) for it to be eligible to be added to array X
+                                                    # so we convert it from (CHANNEL, PIXEL,PIXEL) to the req. dims
+        X[:, :, :, p] = img # add the img to X
     end
     Y = onehotbatch(dataset[indexs[1]:indexs[end], 1], 0:29)
     return (X, Y)
@@ -83,7 +87,8 @@ for e in 1:epochs
     b = 1
     for i in indexs
         println("Batch no. -> $b")
-        train_batch = [create_batch(i; path = train_path, csv = train_csv, dataset = train_dataset)]
+        train_batch = [create_batch(i; path = train_path, csv = train_csv, dataset = train_dataset)] # we load every batch before training
+        # This way we dont have to load the whole big dataset into one array
         Flux.train!(loss, params(m), train_batch , opt, cb = cbfunc)
         b+=1
     end
