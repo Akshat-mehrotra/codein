@@ -130,7 +130,7 @@ display(scene)
 ![img6](https://github.com/Akshat-mehrotra/codein/blob/master/JULIA/Makie%20attributes/image/p6.png)
 
 
-```juila
+```julia
 scene = Scene()
 img = Float32.(channelview(source_img))
 volume!(scene, img, isorange = 0.012f0, isovalue = 0.3f0)
@@ -159,3 +159,4 @@ display(a)
 ---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+
